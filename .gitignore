@@ -1,0 +1,131 @@
+# Compiled binary files
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Object files and static libraries
+*.o
+*.obj
+*.a
+*.lib
+
+# Debugging files
+*.pdb
+*.idb
+
+# Build system files
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
+/Makefile
+/compile_commands.json
+/build/
+/Debug/
+/Release/
+/dist/
+
+# IDE and Editor files
+.vscode/
+*.code-workspace
+.idea/
+*.suo
+*.ncb
+*.user
+*.sdf
+*.vcxproj*
+*.xcodeproj/
+*.sln
+*.ipch
+*.swp
+*.swo
+*.DS_Store
+
+# Logs and Temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+
+# Generated documentation
+/docs/
+/doxygen/
+
+# Dependency management
+/node_modules/
+/vendor/
+conan.lock
+conanbuildinfo.*
+vcpkg_installed/
+
+# CLion CMake files
+.cmake/
+.cache/
+# Compiled binary files
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Object files and static libraries
+*.o
+*.obj
+*.a
+*.lib
+
+# Debugging files
+*.pdb
+*.idb
+
+# Build system files
+/CMakeCache.txt
+/CMakeFiles/
+/cmake_install.cmake
+/Makefile
+/compile_commands.json
+/build/
+/Debug/
+/Release/
+/dist/
+
+# IDE and Editor files
+.vscode/
+*.code-workspace
+.idea/
+*.suo
+*.ncb
+*.user
+*.sdf
+*.vcxproj*
+*.xcodeproj/
+*.sln
+*.ipch
+*.swp
+*.swo
+*.DS_Store
+
+# Logs and Temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+
+# Generated documentation
+/docs/
+/doxygen/
+
+# Dependency management
+/node_modules/
+/vendor/
+conan.lock
+conanbuildinfo.*
+vcpkg_installed/
+
+# CLion CMake files
+.cmake/
+.cache/
+
