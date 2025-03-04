@@ -42,6 +42,8 @@ int main()
     ParserCCSDS parser;
     parser.printCCSDSPacket(buffer, packetSize, true);
 
+    // Writing to transmission.bin
+    cout << "Writing to Transmission.bin" << "\n";
     parser.writeTransmission(packet);
 
     // Free allocated memory

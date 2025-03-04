@@ -12,13 +12,28 @@ private:
 public:
     ParserCCSDS() {}
 
+    void readTransmission(){
+        
+    }
+
     void writeTransmission(CCSDS_Packet *packet)
     {
-        size_t packetSize = sizeof(packet);
-        printf("\nWrite to bin %ld\n",packetSize);
+        size_t packetSize = sizeof(CCSDS_PrimaryHeader) + packet->primaryHeader.packet_length;
+
         // Serialize Packet into a Byte Array
         uint8_t buffer[packetSize];
         memcpy(buffer, packet, packetSize);
+
+        ofstream outFile("Transmission.bin", ios::binary);
+
+        if (!outFile)
+        {
+            cerr << "Error opening Tranmission.bin" << "\n";
+        }
+
+        outFile.write(reinterpret_cast<const char*>(buffer), packetSize);
+
+        outFile.close();
     }
 
     void printCCSDSPacket(const uint8_t *buffer, size_t bufferSize, bool print_data)
