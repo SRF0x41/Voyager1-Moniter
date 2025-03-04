@@ -1,11 +1,66 @@
 #include <iostream>
-#include <cstring>        // For memcpy
-#include "CCSDS_header.h" // Include the CCSDS header file
-#include "ParserCCSDS.cpp"
-#define INCLUDE_SECONDARY_HEADER
+#include <fstream>
+#include <fcntl.h>
+#include <termios.h>
+#include <unistd.h>
 
 using namespace std;
 
+/* Compilation notes
+g++ serial_read_mac.cpp -o serial_read
+
+*/
+
+int main() {
+    const char* portName = "/dev/tty.usbserial-0001";  // Change this to your ESP32's serial port
+
+    int serialPort = open(portName, O_RDONLY | O_NOCTTY);
+    if (serialPort == -1) {
+        cerr << "Error: Cannot open serial port!" << endl;
+        return 1;
+    }
+
+    // Configure Serial Port
+    struct termios options;
+    tcgetattr(serialPort, &options);
+    cfsetispeed(&options, B115200);  // Set baud rate to match ESP32
+    options.c_cflag = CS8 | CLOCAL | CREAD; // 8-bit data
+    options.c_iflag = IGNPAR;
+    options.c_oflag = 0;
+    options.c_lflag = 0;
+    tcflush(serialPort, TCIFLUSH);
+    tcsetattr(serialPort, TCSANOW, &options);
+
+    cout << "Listening for serial data..." << endl;
+    ofstream binFile("output.bin", ios::binary);
+
+    if (!binFile) {
+        cerr << "Error: Unable to create binary file!" << endl;
+        return 1;
+    }
+
+    char buffer[256];
+    while (true) {
+        int bytesRead = read(serialPort, buffer, sizeof(buffer));
+        if (bytesRead > 0) {
+            binFile.write(buffer, bytesRead);
+            cout << "Received " << bytesRead << " bytes and saved to file." << endl;
+        }
+    }
+
+    binFile.close();
+    close(serialPort);
+    return 0;
+}
+
+
+
+
+
+
+
+
+/*
 int main()
 {
     size_t payloadSize = 3; // Example: 3-byte payload
@@ -54,3 +109,4 @@ int main()
 
     return 0;
 }
+*/
