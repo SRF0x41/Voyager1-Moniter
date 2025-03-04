@@ -46,6 +46,9 @@ int main()
     cout << "Writing to Transmission.bin" << "\n";
     parser.writeTransmission(packet);
 
+    // Readint transmission.bin
+    parser.readTransmission();
+
     // Free allocated memory
     free(packet);
 
