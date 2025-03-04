@@ -38,8 +38,11 @@ int main()
 
     // Read Back the Packet
     cout << "Reading CCSDS Packet..." << std::endl;
+
     ParserCCSDS parser;
     parser.printCCSDSPacket(buffer, packetSize, true);
+
+    parser.writeTransmission(packet);
 
     // Free allocated memory
     free(packet);

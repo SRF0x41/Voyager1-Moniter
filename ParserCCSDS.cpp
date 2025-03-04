@@ -1,5 +1,6 @@
 #include <iostream>
-#include <cstring>        // For memcpy
+#include <cstring> // For memcpy
+#include <fstream>
 #include "CCSDS_header.h" // Include the CCSDS header file
 #define INCLUDE_SECONDARY_HEADER
 
@@ -9,10 +10,15 @@ class ParserCCSDS
 {
 private:
 public:
-    ParserCCSDS(){}
+    ParserCCSDS() {}
 
-    void writeTransmission(){
-        
+    void writeTransmission(CCSDS_Packet *packet)
+    {
+        size_t packetSize = sizeof(packet);
+        printf("\nWrite to bin %ld\n",packetSize);
+        // Serialize Packet into a Byte Array
+        uint8_t buffer[packetSize];
+        memcpy(buffer, packet, packetSize);
     }
 
     void printCCSDSPacket(const uint8_t *buffer, size_t bufferSize, bool print_data)
