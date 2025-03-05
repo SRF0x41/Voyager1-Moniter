@@ -31,7 +31,7 @@ int main()
     tcflush(serialPort, TCIFLUSH);
     tcsetattr(serialPort, TCSANOW, &options);
 
-    cout << "Listening for serial data..." << endl;
+    cout << "Listening for serial " << portName << endl;
 
     uint8_t byteReceived;                             // Variable to store the received byte
     uint8_t expectedSequence[3] = {0xAA, 0xBB, 0xCC}; // Expected byte sequence
@@ -62,7 +62,7 @@ int main()
         else
         {
             // Start word read start reading packet bytes;
-            int bytesRead = read(serialPort, packet_buffer + packet_bytes, BUFFER_SIZE - bytesRead);
+            int bytesRead = read(serialPort, packet_buffer + packet_bytes, BUFFER_SIZE - packet_bytes);
             if (bytesRead > 0)
             {
                 packet_bytes += bytesRead; // Keep track of total bytes received
