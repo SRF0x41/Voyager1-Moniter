@@ -6,10 +6,7 @@
 
 using namespace std;
 
-/* Compilation notes
-g++ serial_read_mac.cpp -o serial_read
 
-*/
 
 int main() {
     const char* portName = "/dev/tty.usbserial-0001";  // Change this to your ESP32's serial port
@@ -32,13 +29,13 @@ int main() {
     tcsetattr(serialPort, TCSANOW, &options);
 
     cout << "Listening for serial data..." << endl;
-    ofstream binFile("output.bin", ios::binary);
+    ofstream binFile("Tranmission.bin", ios::binary);
 
     if (!binFile) {
         cerr << "Error: Unable to create binary file!" << endl;
         return 1;
     }
-
+    //
     char buffer[256];
     while (true) {
         int bytesRead = read(serialPort, buffer, sizeof(buffer));
