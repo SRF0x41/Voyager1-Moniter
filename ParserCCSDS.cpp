@@ -32,6 +32,7 @@ public:
 
     void printCCSDS(CCSDS_Packet *packet, bool dispPayload)
     {
+        // Print given a packet
         cout << "CCSDS Packet Details:\n";
         cout << "Version: " << static_cast<int>(packet->primaryHeader.version) << "\n";
         cout << "Type: " << static_cast<int>(packet->primaryHeader.type) << "\n";
@@ -51,7 +52,7 @@ public:
         }
     }
 
-    void readTransmission()
+    CCSDS_Packet *readTransmission()
     {
         ifstream inFile("Transmission.bin", ios::binary | ios::ate);
 
@@ -64,9 +65,6 @@ public:
         streamsize fileSize = inFile.tellg();
         inFile.seekg(0, ios::beg); // Move back to the beggining
 
-        // Debug print
-        printf("Fize size bytes %ld\n ", fileSize);
-
         // Allocate buffer array
         uint8_t buffer[fileSize];
 
@@ -74,8 +72,7 @@ public:
 
         inFile.close();
 
-        printf("--- DATA LOADED FROM TRANSMISSION ---\n");
-        printCCSDS(buffer, fileSize, true);
+        return parseCCSDS(buffer);
     }
 
     void writeTransmission(CCSDS_Packet *packet)
@@ -100,6 +97,7 @@ public:
 
     void printCCSDS(const uint8_t *buffer, size_t bufferSize, bool print_data)
     {
+        // Print from buffer
         if (bufferSize < sizeof(CCSDS_PrimaryHeader))
         {
             std::cerr << "Error: Buffer too small to contain a valid CCSDS packet!" << std::endl;

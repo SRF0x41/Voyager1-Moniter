@@ -3,10 +3,19 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
+#include "CCSDS_header.h"
+#include "ParserCCSDS.cpp"
 
 using namespace std;
 
 int main(){
+    // Test read from bin
+    CCSDS_Packet *packet;
+    
+    ParserCCSDS parser;
+    packet = parser.readTransmission();
+
+    parser.printCCSDS(packet,true);
     return 0;
 }
 
