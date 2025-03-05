@@ -6,8 +6,11 @@
 
 using namespace std;
 
+int main(){
+    return 0;
+}
 
-
+/*
 int main() {
     const char* portName = "/dev/tty.usbserial-0001";  // Change this to your ESP32's serial port
 
@@ -51,13 +54,6 @@ int main() {
 }
 
 
-
-
-
-
-
-
-/*
 int main()
 {
     size_t payloadSize = 3; // Example: 3-byte payload
